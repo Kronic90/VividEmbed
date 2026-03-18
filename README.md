@@ -437,7 +437,7 @@ If you use VividEmbed in your research or projects:
 ```
 @software{vividembed2026,
   title   = {VividEmbed: Neuroscience-Inspired Memory Embeddings for AI Companions},
-  author  = {Scott Kronick},
+  author  = {Kronic90. Scott},
   year    = {2026},
   url     = {https://github.com/Kronic90/VividnessMem-Ai-Roommates}
 }
