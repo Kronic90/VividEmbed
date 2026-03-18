@@ -1,0 +1,2136 @@
+[
+  {
+    "qa_id": "qa_180",
+    "level": "L1",
+    "query": "Could you send the heartbeat confirmation to the email I mentioned earlier for the booking?",
+    "gold_tool": "Heartbeat",
+    "gold_args": {
+      "email": "user@example.com"
+    },
+    "pred_raw": "```json\n{\"name\": \"Heartbeat\", \"arguments\": {\"email\": \"user@example.com\"}}\n```",
+    "pred_parsed": {
+      "name": "Heartbeat",
+      "arguments": {
+        "email": "user@example.com"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_122",
+    "level": "L4",
+    "query": "Could you pull up the atmospheric outlook for the next few days there, like we talked about earlier?",
+    "gold_tool": "GetWeatherForecast",
+    "gold_args": {
+      "location": "New York City",
+      "days": 3
+    },
+    "pred_raw": "{\"name\": \"GetWeatherForecast\", \"arguments\": {\"location\": \"New York City\", \"days\": 3}}",
+    "pred_parsed": {
+      "name": "GetWeatherForecast",
+      "arguments": {
+        "location": "New York City",
+        "days": 3
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_271",
+    "level": "L1",
+    "query": "Go ahead and set up the reverb on that track to feel like the big space we talked about.",
+    "gold_tool": "audio.reverbSettings",
+    "gold_args": {
+      "track_id": "audio123",
+      "room_size": "large",
+      "decay_time": 2.0,
+      "wet_dry_mix": 50.0
+    },
+    "pred_raw": "```json\n{\"name\": \"audio.reverbSettings\", \"arguments\": {\"track_id\": \"track123\", \"room_size\": \"large\"}}\n```",
+    "pred_parsed": {
+      "name": "audio.reverbSettings",
+      "arguments": {
+        "track_id": "track123",
+        "room_size": "large"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.3333333333333333,
+    "bleu1": 0.375
+  },
+  {
+    "qa_id": "qa_054",
+    "level": "L1",
+    "query": "Any upcoming shows for the artist I saw right after her album topped the charts?",
+    "gold_tool": "concert.scheduleLookup",
+    "gold_args": {
+      "artist": "Billie Eilish"
+    },
+    "pred_raw": "```json\n{\"name\": \"concert.scheduleLookup\", \"arguments\": {\"artist\": \"Taylor Swift\", \"dateRange\": {\"start\": \"2024-01-01\", \"end\": \"2024-12-31\"}}}\n```",
+    "pred_parsed": {
+      "name": "concert.scheduleLookup",
+      "arguments": {
+        "artist": "Taylor Swift",
+        "dateRange": {
+          "start": "2024-01-01",
+          "end": "2024-12-31"
+        }
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.125
+  },
+  {
+    "qa_id": "qa_167",
+    "level": "L1",
+    "query": "I’m running low on fuel—where’s the closest place to fill up near the theater we always go to?",
+    "gold_tool": "findNearestGasStation",
+    "gold_args": {
+      "location": "San Ramon"
+    },
+    "pred_raw": "```json\n{\"name\": \"findNearestGasStation\", \"arguments\": {\"location\": \"San Ramon, CA\"}}\n```",
+    "pred_parsed": {
+      "name": "findNearestGasStation",
+      "arguments": {
+        "location": "San Ramon, CA"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_147",
+    "level": "L1",
+    "query": "What’s the current reading on that index we track every morning?",
+    "gold_tool": "Stock Quote Price",
+    "gold_args": {
+      "symbol": "Dow Jones"
+    },
+    "pred_raw": "{\"name\": \"Stock Quote Price\", \"arguments\": {\"symbol\": \"GOOGL\"}}",
+    "pred_parsed": {
+      "name": "Stock Quote Price",
+      "arguments": {
+        "symbol": "GOOGL"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_163",
+    "level": "L1",
+    "query": "Can you look up that song for me again? I still can’t recall the full title or who sings it, but you know the one I’m talking about.",
+    "gold_tool": "Search Track",
+    "gold_args": {
+      "limit": 5,
+      "track": "sunshine"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search Track\", \"arguments\": {\"track\": \"sunshine\", \"limit\": 5}}\n```",
+    "pred_parsed": {
+      "name": "Search Track",
+      "arguments": {
+        "track": "sunshine",
+        "limit": 5
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_026",
+    "level": "L1",
+    "query": "How much ETH is sitting in my wallet right now?",
+    "gold_tool": "Get Ether Balance",
+    "gold_args": {
+      "address": "0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Ether Balance\", \"arguments\": {\"address\": \"0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Ether Balance",
+      "arguments": {
+        "address": "0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_086",
+    "level": "L1",
+    "query": "Can you pull up the latest details on that sandbox RPG we were talking about earlier?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Hytale",
+      "analyzed": false,
+      "gender": "",
+      "language": "",
+      "monosemous": false,
+      "morph": false,
+      "number": "",
+      "page": 1,
+      "polysemous": false,
+      "pos": "",
+      "sample": "",
+      "source": "global",
+      "subcategorization": ""
+    },
+    "pred_raw": "{\"name\": \"Search\", \"arguments\": {\"text\": \"Hytale\"}}",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "text": "Hytale"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.14285714285714288,
+    "bleu1": 0.1
+  },
+  {
+    "qa_id": "qa_109",
+    "level": "L1",
+    "query": "What are some good interview tips for that role we talked about?",
+    "gold_tool": "interview.get_tips",
+    "gold_args": {
+      "job_role": "programmer position at Microsoft"
+    },
+    "pred_raw": "```json\n{\"name\": \"interview.get_tips\", \"arguments\": {\"job_role\": \"programmer\"}}\n```",
+    "pred_parsed": {
+      "name": "interview.get_tips",
+      "arguments": {
+        "job_role": "programmer"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.4
+  },
+  {
+    "qa_id": "qa_388",
+    "level": "L1",
+    "query": "Can you pull up my communication preferences using the unique user ID I shared earlier?",
+    "gold_tool": "getProstring",
+    "gold_args": {
+      "username": "usrid56789"
+    },
+    "pred_raw": "```json\n{\"name\": \"getProstring\", \"arguments\": {\"username\": \"USR001\"}}\n```",
+    "pred_parsed": {
+      "name": "getProstring",
+      "arguments": {
+        "username": "USR001"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_153",
+    "level": "L1",
+    "query": "Can you look up the product details for the barcode I mentioned earlier?",
+    "gold_tool": "products/search-by-barcode",
+    "gold_args": {
+      "barcode": "5901234123457",
+      "store_id": "default_store"
+    },
+    "pred_raw": "```json\n{\"name\": \"products/search-by-barcode\", \"arguments\": {\"barcode\": \"7622300336738\", \"store_id\": \"unknown\"}}\n```",
+    "pred_parsed": {
+      "name": "products/search-by-barcode",
+      "arguments": {
+        "barcode": "7622300336738",
+        "store_id": "unknown"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_269",
+    "level": "L1",
+    "query": "Could you suggest some related terms for the project topic we discussed earlier?",
+    "gold_tool": "Suggest",
+    "gold_args": {
+      "keyword": "stock exchange",
+      "lr": "en-US"
+    },
+    "pred_raw": "```json\n{\"name\": \"Suggest\", \"arguments\": {\"keyword\": \"stock exchange\"}}\n```",
+    "pred_parsed": {
+      "name": "Suggest",
+      "arguments": {
+        "keyword": "stock exchange"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.6
+  },
+  {
+    "qa_id": "qa_370",
+    "level": "L1",
+    "query": "Can you show me some cat breeds that match what I usually go for?",
+    "gold_tool": "Search Cat Breeds",
+    "gold_args": {
+      "search": "natural"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search Cat Breeds\", \"arguments\": {\"search\": \"natural\"}}\n```",
+    "pred_parsed": {
+      "name": "Search Cat Breeds",
+      "arguments": {
+        "search": "natural"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_359",
+    "level": "L3",
+    "query": "Can you pull up the current safety profile and any recent pediatric warnings for the medication we discussed earlier?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Paracetamol"
+    },
+    "pred_raw": "```json\n{\"name\": \"Drug Information API\", \"arguments\": {\"drug\": \"Paracetamol\"}}\n```",
+    "pred_parsed": {
+      "name": "Drug Information API",
+      "arguments": {
+        "drug": "Paracetamol"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_239",
+    "level": "L1",
+    "query": "Can you pull up the teams I’m on with that same ID I used when asking about my old emails?",
+    "gold_tool": "Get Requesting User Teams",
+    "gold_args": {
+      "user_id": "12345"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Requesting User Teams\", \"arguments\": {\"user_id\": \"12345\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Requesting User Teams",
+      "arguments": {
+        "user_id": "12345"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_351",
+    "level": "L2",
+    "query": "Any fresh stories about my invention making the rounds?",
+    "gold_tool": "Get Stories by Topic",
+    "gold_args": {
+      "topic": "laser-gun",
+      "filter": "latest",
+      "limit": 10,
+      "page": 0
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Stories by Topic\", \"arguments\": {\"topic\": \"laser gun\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Stories by Topic",
+      "arguments": {
+        "topic": "laser gun"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.125
+  },
+  {
+    "qa_id": "qa_104",
+    "level": "L4",
+    "query": "Given how my practice has been going lately, could you analyze the ethical implications of continuing down this path for my inner growth?",
+    "gold_tool": "analyzeEthicalImplications",
+    "gold_args": {
+      "technology": "meditation",
+      "context": "spiritual development"
+    },
+    "pred_raw": "{\"name\": \"analyzeEthicalImplications\", \"arguments\": {\"technology\": \"meditation\"}}",
+    "pred_parsed": {
+      "name": "analyzeEthicalImplications",
+      "arguments": {
+        "technology": "meditation"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.4
+  },
+  {
+    "qa_id": "qa_085",
+    "level": "L4",
+    "query": "Hey, can you whip up that signature for the feed endpoint like you did last time?",
+    "gold_tool": "Generate TikTok Signature",
+    "gold_args": {
+      "url": "https://api.tiktok.com/feed/items"
+    },
+    "pred_raw": "```json\n{\"name\": \"Generate TikTok Signature\", \"arguments\": {\"url\": \"https://api.tiktok.com/feed/items\"}}\n```",
+    "pred_parsed": {
+      "name": "Generate TikTok Signature",
+      "arguments": {
+        "url": "https://api.tiktok.com/feed/items"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_278",
+    "level": "L1",
+    "query": "Can you pull up the details for that customer account we were just talking about in the pet store system?",
+    "gold_tool": "getUserByName",
+    "gold_args": {
+      "username": "johndoe"
+    },
+    "pred_raw": "```json\n{\"name\": \"getUserByName\", \"arguments\": {\"username\": \"johndoe\"}}\n```",
+    "pred_parsed": {
+      "name": "getUserByName",
+      "arguments": {
+        "username": "johndoe"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_336",
+    "level": "L2",
+    "query": "How's the currency from that recovering economy looking over the next few days?",
+    "gold_tool": "Get Exchange Rates Forecast",
+    "gold_args": {
+      "country_code": "CN",
+      "currency": "CNY",
+      "predict_days": 5
+    },
+    "pred_raw": "{\"name\": \"Get Exchange Rates Forecast\", \"arguments\": {\"country_code\": \"China\", \"currency\": \"CNY\", \"predict_days\": 5}}",
+    "pred_parsed": {
+      "name": "Get Exchange Rates Forecast",
+      "arguments": {
+        "country_code": "China",
+        "currency": "CNY",
+        "predict_days": 5
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.8333333333333334
+  },
+  {
+    "qa_id": "qa_128",
+    "level": "L1",
+    "query": "Can you pull up the sector breakdowns for that field we talked about earlier?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "education",
+      "language": "en",
+      "source": "global",
+      "page": 1,
+      "analyzed": false,
+      "morph": false
+    },
+    "pred_raw": "{\"name\": \"Get Taxonomies\", \"arguments\": {\"context\": \"technology\"}}",
+    "pred_parsed": {
+      "name": "Get Taxonomies",
+      "arguments": {
+        "context": "technology"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0
+  },
+  {
+    "qa_id": "qa_141",
+    "level": "L2",
+    "query": "Could you pull up some solid prep advice for the role we were just talking about?",
+    "gold_tool": "interview.get_tips",
+    "gold_args": {
+      "job_role": "Python"
+    },
+    "pred_raw": "```json\n{\"name\": \"interview.get_tips\", \"arguments\": {\"job_role\": \"Python\"}}\n```",
+    "pred_parsed": {
+      "name": "interview.get_tips",
+      "arguments": {
+        "job_role": "Python"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_094",
+    "level": "L4",
+    "query": "Go ahead and give the greeting task to the person who wrapped up all that IT stuff the other night.",
+    "gold_tool": "assignTask",
+    "gold_args": {
+      "project_id": 6842,
+      "task_name": "Hi charlie",
+      "assignee": "Alex"
+    },
+    "pred_raw": "{\"name\": \"assignTask\", \"arguments\": {\"assignee\": \"the person who wrapped up all that IT stuff the other night\", \"task_name\": \"greeting task\"}}",
+    "pred_parsed": {
+      "name": "assignTask",
+      "arguments": {
+        "assignee": "the person who wrapped up all that IT stuff the other night",
+        "task_name": "greeting task"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.125
+  },
+  {
+    "qa_id": "qa_040",
+    "level": "L4",
+    "query": "What are the latest headlines saying about how my favorite crypto is moving this week?",
+    "gold_tool": "Search News",
+    "gold_args": {
+      "keyword": "Bitcoin market trend"
+    },
+    "pred_raw": "{\"name\": \"Search News\", \"arguments\": {\"keyword\": \"Bitcoin\", \"pageIndex\": 1, \"pageSize\": 5}}",
+    "pred_parsed": {
+      "name": "Search News",
+      "arguments": {
+        "keyword": "Bitcoin",
+        "pageIndex": 1,
+        "pageSize": 5
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_334",
+    "level": "L1",
+    "query": "What are the key things I should keep in mind for that outdoor activity we talked about?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "camping"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search\", \"arguments\": {\"text\": \"camping\"}}\n```",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "text": "camping"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_112",
+    "level": "L2",
+    "query": "Could you pull up a clear explanation of those circuit rules we were just talking about?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "query": "Kirchhoff%27s%20laws%20explanation"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search\", \"arguments\": {\"query\": \"Kirchoff's laws and how to apply them to solve electronic circuits with several current sources\"}}\n```",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "query": "Kirchoff's laws and how to apply them to solve electronic circuits with several current sources"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0625
+  },
+  {
+    "qa_id": "qa_372",
+    "level": "L1",
+    "query": "Can you pull up the Instagram stories for that account I mentioned earlier?",
+    "gold_tool": "Get User Story",
+    "gold_args": {
+      "username": "H78J90KD"
+    },
+    "pred_raw": "{\"name\": \"Get User Story\", \"arguments\": {\"username\": \"A23BCD45\"}}",
+    "pred_parsed": {
+      "name": "Get User Story",
+      "arguments": {
+        "username": "A23BCD45"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_344",
+    "level": "L2",
+    "query": "Give me a random Spanish word of the usual length we talked about.",
+    "gold_tool": "Get Multiple Random Words",
+    "gold_args": {
+      "count": 1,
+      "minLength": 5,
+      "maxLength": 8
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Random Word\", \"arguments\": {\"language\": \"Spanish\", \"word-size\": \"medium\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Random Word",
+      "arguments": {
+        "language": "Spanish",
+        "word-size": "medium"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0
+  },
+  {
+    "qa_id": "qa_184",
+    "level": "L4",
+    "query": "Who’s the standout cleaner everyone raves about, and how many homes have they spruced up so far?",
+    "gold_tool": "Data Provider",
+    "gold_args": {
+      "provider": "cleaning service provider recognized for excellent service",
+      "amount": 1
+    },
+    "pred_raw": "```json\n{\"name\": \"Data Provider\", \"arguments\": {\"provider\": \"top-rated\", \"amount\": \"1\"}}\n```",
+    "pred_parsed": {
+      "name": "Data Provider",
+      "arguments": {
+        "provider": "top-rated",
+        "amount": "1"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.30000000000000004
+  },
+  {
+    "qa_id": "qa_010",
+    "level": "L1",
+    "query": "Can you pull up the latest news on that concept we were just talking about for stock analysis?",
+    "gold_tool": "Search News",
+    "gold_args": {
+      "keyword": "market capitalization"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search News\", \"arguments\": {\"keyword\": \"stock analysis\", \"pageIndex\": 1, \"pageSize\": 10}}\n```",
+    "pred_parsed": {
+      "name": "Search News",
+      "arguments": {
+        "keyword": "stock analysis",
+        "pageIndex": 1,
+        "pageSize": 10
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.14285714285714285
+  },
+  {
+    "qa_id": "qa_358",
+    "level": "L1",
+    "query": "How’s the publicity doing on the platform we picked for the campaign?",
+    "gold_tool": "getPublicityData",
+    "gold_args": {
+      "campaign_id": 0,
+      "platform": "Facebook"
+    },
+    "pred_raw": "```json\n{\"name\": \"getPublicityData\", \"arguments\": {\"campaign_id\": \"12345\", \"start_date\": \"2020-06-01\", \"end_date\": \"2020-06-15\", \"platform\": \"Facebook\"}}\n```",
+    "pred_parsed": {
+      "name": "getPublicityData",
+      "arguments": {
+        "campaign_id": "12345",
+        "start_date": "2020-06-01",
+        "end_date": "2020-06-15",
+        "platform": "Facebook"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.3333333333333333,
+    "bleu1": 0.375
+  },
+  {
+    "qa_id": "qa_030",
+    "level": "L1",
+    "query": "Hey, can you tell me what the big tech stock I asked about earlier is trading at right now?",
+    "gold_tool": "Stock Quote Price",
+    "gold_args": {
+      "symbol": "AMZN"
+    },
+    "pred_raw": "{\"name\": \"Stock Quote Price\", \"arguments\": {\"symbol\": \"AMZN\"}}",
+    "pred_parsed": {
+      "name": "Stock Quote Price",
+      "arguments": {
+        "symbol": "AMZN"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_202",
+    "level": "L1",
+    "query": "Could you pull up the logo image for that cricket league we were talking about earlier?",
+    "gold_tool": "Get Cricket League Logo Image",
+    "gold_args": {
+      "tournamentId": 435
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Cricket League Logo Image\", \"arguments\": {\"tournamentId\": 435.0}}\n```",
+    "pred_parsed": {
+      "name": "Get Cricket League Logo Image",
+      "arguments": {
+        "tournamentId": 435.0
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_393",
+    "level": "L2",
+    "query": "Could you pull the boundary coordinates for that state we discussed earlier and save them with the filename I mentioned?",
+    "gold_tool": "states",
+    "gold_args": {
+      "states": "NY"
+    },
+    "pred_raw": "```json\n{\"name\": \"states\", \"arguments\": {\"properties\": {\"states\": \"NY\"}}}\n```",
+    "pred_parsed": {
+      "name": "states",
+      "arguments": {
+        "properties": {
+          "states": "NY"
+        }
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0
+  },
+  {
+    "qa_id": "qa_256",
+    "level": "L1",
+    "query": "Can you pull up the current details for that Instagram account I wanted to verify?",
+    "gold_tool": "Get Instagram User Information",
+    "gold_args": {
+      "username": "travelwithus"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Instagram User Information\", \"arguments\": {\"username\": \"travelwithus\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Instagram User Information",
+      "arguments": {
+        "username": "travelwithus"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_264",
+    "level": "L1",
+    "query": "Can you pull up the full corporate profile for the company we were just discussing, using the identifier I mentioned earlier?",
+    "gold_tool": "Company Details",
+    "gold_args": {
+      "cnpj": "20.276.616/0001-60"
+    },
+    "pred_raw": "```json\n{\"name\": \"Company Details\", \"arguments\": {\"cnpj\": \"20.276.616/0001-60\"}}\n```",
+    "pred_parsed": {
+      "name": "Company Details",
+      "arguments": {
+        "cnpj": "20.276.616/0001-60"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_296",
+    "level": "L3",
+    "query": "Can you run the usual health check on that environmental index service we monitor?",
+    "gold_tool": "Health Check",
+    "gold_args": {
+      "systemId": "ecoindex API"
+    },
+    "pred_raw": "```json\n{\"name\": \"Health Check\", \"arguments\": {\"systemId\": \"ecoi\"}}\n```",
+    "pred_parsed": {
+      "name": "Health Check",
+      "arguments": {
+        "systemId": "ecoi"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_353",
+    "level": "L2",
+    "query": "Show me the top challenges again, sorted the way I like.",
+    "gold_tool": "Get Levels",
+    "gold_args": {
+      "limit": 2,
+      "orderBy": "desc",
+      "sortBy": "stats"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Levels\", \"arguments\": {\"sortBy\": \"stats\", \"orderBy\": \"desc\", \"limit\": 2}}\n```",
+    "pred_parsed": {
+      "name": "Get Levels",
+      "arguments": {
+        "sortBy": "stats",
+        "orderBy": "desc",
+        "limit": 2
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_018",
+    "level": "L1",
+    "query": "What's the current rate for the currency pair we were tracking earlier?",
+    "gold_tool": "Get Currency Price",
+    "gold_args": {
+      "pair": "USD-EUR"
+    },
+    "pred_raw": "{\"name\": \"Get Currency Price\", \"arguments\": {\"pair\": \"XBTUSD\"}}",
+    "pred_parsed": {
+      "name": "Get Currency Price",
+      "arguments": {
+        "pair": "XBTUSD"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_307",
+    "level": "L1",
+    "query": "Echo back what I'm working on, like you did last time—just the topic line.",
+    "gold_tool": "Echo",
+    "gold_args": {
+      "query": "I am writing a short paper about revolutionary weapons in both world wars.",
+      "query2": "2"
+    },
+    "pred_raw": "{\"name\": \"Echo\", \"arguments\": {\"query\": \"Setting forth on an exciting quest from San Francisco to Stonebrook to uncover ancestral stories!\"}}",
+    "pred_parsed": {
+      "name": "Echo",
+      "arguments": {
+        "query": "Setting forth on an exciting quest from San Francisco to Stonebrook to uncover ancestral stories!"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0625
+  },
+  {
+    "qa_id": "qa_314",
+    "level": "L1",
+    "query": "Go ahead and remove that innovation project I asked you to scrap earlier.",
+    "gold_tool": "deleteInnovation",
+    "gold_args": {
+      "title": "Smart Bin"
+    },
+    "pred_raw": "```json\n{\"name\": \"deleteInnovation\", \"arguments\": {\"title\": \"Smart Bin\"}}\n```",
+    "pred_parsed": {
+      "name": "deleteInnovation",
+      "arguments": {
+        "title": "Smart Bin"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_177",
+    "level": "L1",
+    "query": "How’s the weather looking for my pickup time there?",
+    "gold_tool": "Get Weather Report",
+    "gold_args": {
+      "cityName": "Las Vegas"
+    },
+    "pred_raw": "{\"name\": \"Get Weather Report\", \"arguments\": {\"cityName\": \"Las Vegas, NV\"}}",
+    "pred_parsed": {
+      "name": "Get Weather Report",
+      "arguments": {
+        "cityName": "Las Vegas, NV"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_217",
+    "level": "L2",
+    "query": "Can you pull up the latest balance sheet for the company we were just talking about?",
+    "gold_tool": "Balance Sheet",
+    "gold_args": {
+      "ticker": "AAPL",
+      "formtype": "10-k",
+      "filingorder": 0
+    },
+    "pred_raw": "{\"name\": \"Balance Sheet\", \"arguments\": {\"ticker\": \"AAPL\"}}",
+    "pred_parsed": {
+      "name": "Balance Sheet",
+      "arguments": {
+        "ticker": "AAPL"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_155",
+    "level": "L1",
+    "query": "Can you go ahead and verify that email address I mentioned earlier?",
+    "gold_tool": "Verify Email",
+    "gold_args": {
+      "email": "test@domain"
+    },
+    "pred_raw": "```json\n{\"name\": \"Verify Email\", \"arguments\": {\"email\": \"test@example.com\"}}\n```",
+    "pred_parsed": {
+      "name": "Verify Email",
+      "arguments": {
+        "email": "test@example.com"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_113",
+    "level": "L3",
+    "query": "Can you pull together a quick news-style rundown of everything I asked about today—morning spots, afternoon sights, the trip summary, and those last-minute travel numbers—so I can see it all in one place?",
+    "gold_tool": "generate_news_report",
+    "gold_args": {
+      "events": [
+        {
+          "title": "Tourist Attractions Request",
+          "description": "User requests 10 tourist places to visit in Cartagena, Colombia.",
+          "time": "morning"
+        },
+        {
+          "title": "Tourist Attractions Request",
+          "description": "User is requesting a list of major tourist attractions in Uttar Pradesh.",
+          "time": "afternoon"
+        },
+        {
+          "title": "Trip Briefing Request",
+          "description": "User requests a quick briefing summarizing all information for their trip tomorrow.",
+          "time": "evening"
+        },
+        {
+          "title": "Travel Insights Request",
+          "description": "User requests metasearch channel performance insights for the last 10 minutes for North America.",
+          "time": "night"
+        }
+      ],
+      "location": "Cartagena, Colombia",
+      "multimedia": [
+        {
+          "type": "image",
+          "url": "https://example.com/cartagena.jpg",
+          "caption": "Cartagena skyline"
+        },
+        {
+          "type": "video",
+          "url": "https://example.com/travel.mp4",
+          "caption": "Travel highlights"
+        }
+      ]
+    },
+    "pred_raw": "```json\n{\"name\": \"generate_news_report\", \"arguments\": {\"events\": [{\"title\": \"Morning Spots\", \"description\": \"Visibility in Whistler in the morning.\", \"time\": \"morning\"}, {\"title\": \"Afternoon Sights\", \"description\": \"Trip summary.\", \"time\": \"afternoon\"}, {\"title\": \"Last-Minute Travel Numbers\", \"description\": \"Travel numbers.\", \"time\": \"afternoon\"}], \"location\": \"Whistler\"}}\n```",
+    "pred_parsed": {
+      "name": "generate_news_report",
+      "arguments": {
+        "events": [
+          {
+            "title": "Morning Spots",
+            "description": "Visibility in Whistler in the morning.",
+            "time": "morning"
+          },
+          {
+            "title": "Afternoon Sights",
+            "description": "Trip summary.",
+            "time": "afternoon"
+          },
+          {
+            "title": "Last-Minute Travel Numbers",
+            "description": "Travel numbers.",
+            "time": "afternoon"
+          }
+        ],
+        "location": "Whistler"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.18947368421052632
+  },
+  {
+    "qa_id": "qa_080",
+    "level": "L1",
+    "query": "Can you pull up the metadata for the user whose endpoint data we just looked up?",
+    "gold_tool": "Get User Metadata",
+    "gold_args": {
+      "user_id": "1001"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get User Metadata\", \"arguments\": {\"user_id\": \"1001\"}}\n```",
+    "pred_parsed": {
+      "name": "Get User Metadata",
+      "arguments": {
+        "user_id": "1001"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_028",
+    "level": "L1",
+    "query": "Can you pull up the full info on that sci-fi flick we were just talking about?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Cybernetic Rhapsody",
+      "analyzed": false,
+      "morph": false,
+      "page": 1,
+      "source": "global"
+    },
+    "pred_raw": "{\"name\": \"Search\", \"arguments\": {\"text\": \"Cybernetic Rhapsody\"}}",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "text": "Cybernetic Rhapsody"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.33333333333333337,
+    "bleu1": 0.2727272727272727
+  },
+  {
+    "qa_id": "qa_123",
+    "level": "L4",
+    "query": "I need some solid reading material—articles and books—with real tips on crafting the thing we’ve been working on. Can you pull the best ones for me?",
+    "gold_tool": "FetchPromptResources",
+    "gold_args": {
+      "promptId": "resignation-letter",
+      "resourceDetails": [
+        {
+          "resourceType": "article",
+          "includeTips": true
+        },
+        {
+          "resourceType": "book",
+          "includeTips": true
+        }
+      ]
+    },
+    "pred_raw": "```json\n{\"name\": \"FetchPromptResources\", \"arguments\": {\"promptId\": \"the thing we’ve been working on\", \"resourceDetails\": [{\"resourceType\": \"article\", \"includeTips\": true}, {\"resourceType\": \"book\", \"includeTips\": true}]}}\n```",
+    "pred_parsed": {
+      "name": "FetchPromptResources",
+      "arguments": {
+        "promptId": "the thing we’ve been working on",
+        "resourceDetails": [
+          {
+            "resourceType": "article",
+            "includeTips": true
+          },
+          {
+            "resourceType": "book",
+            "includeTips": true
+          }
+        ]
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.625
+  },
+  {
+    "qa_id": "qa_337",
+    "level": "L1",
+    "query": "Can you pull up the current details for that nonprofit we keep supporting?",
+    "gold_tool": "getNonProfitInfo",
+    "gold_args": {
+      "organization": "Helping Hands"
+    },
+    "pred_raw": "```json\n{\"name\": \"getNonProfitInfo\", \"arguments\": {\"organization\": \"Helping Hands\"}}\n```",
+    "pred_parsed": {
+      "name": "getNonProfitInfo",
+      "arguments": {
+        "organization": "Helping Hands"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_383",
+    "level": "L4",
+    "query": "Which teams am I on again?",
+    "gold_tool": "Get Requesting User Teams",
+    "gold_args": {
+      "user_id": "U12345"
+    },
+    "pred_raw": "{\"name\": \"Get Requesting User Teams\", \"arguments\": {\"user_id\": \"U12345\"}}",
+    "pred_parsed": {
+      "name": "Get Requesting User Teams",
+      "arguments": {
+        "user_id": "U12345"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_071",
+    "level": "L1",
+    "query": "How has the floor price of my NFT collection been trending lately?",
+    "gold_tool": "Get Price History By ID",
+    "gold_args": {
+      "id": "0x1234567890abcdef"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Price History By ID\", \"arguments\": {\"id\": \"XYZ\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Price History By ID",
+      "arguments": {
+        "id": "XYZ"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_077",
+    "level": "L1",
+    "query": "Can you whip up the Wi-Fi QR code for the office network, with the usual color scheme I like?",
+    "gold_tool": "Generate Wifi QR Code",
+    "gold_args": {
+      "authentication": "unencrypted",
+      "background_color": "#FFFFFF",
+      "data_gradient_end_color": "green",
+      "data_gradient_start_color": "blue",
+      "data_gradient_style": "None",
+      "data_pattern": "RECT",
+      "error_correction": "M",
+      "eye_color_inner": "#000000",
+      "eye_color_outer": "#000000",
+      "eye_pattern": "RECT_RECT",
+      "size": "m",
+      "ssid": "Office-Office"
+    },
+    "pred_raw": "```json\n{\"name\": \"Generate Wifi QR Code\", \"arguments\": {\"authentication\": \"unencrypted\", \"size\": \"m\", \"ssid\": \"Office-Office\", \"data_gradient_start_color\": \"#0000FF\", \"data_gradient_end_color\": \"#00FF00\"}}\n```",
+    "pred_parsed": {
+      "name": "Generate Wifi QR Code",
+      "arguments": {
+        "authentication": "unencrypted",
+        "size": "m",
+        "ssid": "Office-Office",
+        "data_gradient_start_color": "#0000FF",
+        "data_gradient_end_color": "#00FF00"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.35294117647058826,
+    "bleu1": 0.33333333333333337
+  },
+  {
+    "qa_id": "qa_067",
+    "level": "L1",
+    "query": "Can you pull up the horoscope details for the sign we said pairs best with Aries and Gemini?",
+    "gold_tool": "Zodiac Sign Information",
+    "gold_args": {
+      "sign": "leo"
+    },
+    "pred_raw": "{\"name\": \"Zodiac Sign Information\", \"arguments\": {\"sign\": \"leo\"}}",
+    "pred_parsed": {
+      "name": "Zodiac Sign Information",
+      "arguments": {
+        "sign": "leo"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_236",
+    "level": "L2",
+    "query": "Show me the latest clips on that topic we were tracking this morning.",
+    "gold_tool": "market/get-videos",
+    "gold_args": {
+      "market": "stocks",
+      "category": "news",
+      "limit": 10
+    },
+    "pred_raw": "```json\n{\"name\": \"market/get-videos\", \"arguments\": {\"market\": \"stock market news\", \"category\": \"stock market news\", \"limit\": 3}}\n```",
+    "pred_parsed": {
+      "name": "market/get-videos",
+      "arguments": {
+        "market": "stock market news",
+        "category": "stock market news",
+        "limit": 3
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.4
+  },
+  {
+    "qa_id": "qa_349",
+    "level": "L3",
+    "query": "Can you pull up the full lineup and venue info for that show I asked about earlier?",
+    "gold_tool": "Get Event Details",
+    "gold_args": {
+      "event_id": 1234
+    },
+    "pred_raw": "{\"name\": \"Get Event Details\", \"arguments\": {\"event_id\": \"5678\"}}",
+    "pred_parsed": {
+      "name": "Get Event Details",
+      "arguments": {
+        "event_id": "5678"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_025",
+    "level": "L1",
+    "query": "Can you go ahead and arrange the business travel details for my upcoming trip like we talked about?",
+    "gold_tool": "business_travel_planner",
+    "gold_args": {
+      "departure_date": "10/20/2023",
+      "destination": "San Francisco",
+      "return_date": "10/25/2023",
+      "preferences": []
+    },
+    "pred_raw": "```json\n{\"name\": \"business_travel_planner\", \"arguments\": {\"destination\": \"New York\", \"departure_date\": \"10/12/2023\", \"return_date\": \"10/15/2023\"}}\n```",
+    "pred_parsed": {
+      "name": "business_travel_planner",
+      "arguments": {
+        "destination": "New York",
+        "departure_date": "10/12/2023",
+        "return_date": "10/15/2023"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_200",
+    "level": "L1",
+    "query": "How far is it from my starting point to that city we talked about, in kilometers?",
+    "gold_tool": "Calculate Distance",
+    "gold_args": {
+      "lat1": 34.0522,
+      "lon1": -118.2437,
+      "lat2": 35.6762,
+      "lon2": 139.6503,
+      "unit": "km"
+    },
+    "pred_raw": "```json\n{\"name\": \"Calculate Distance\", \"arguments\": {\"lat1\": 34.0522, \"lon1\": -118.2437, \"lat2\": 35.6762, \"lon2\": 139.6503, \"unit\": \"km\"}}\n```",
+    "pred_parsed": {
+      "name": "Calculate Distance",
+      "arguments": {
+        "lat1": 34.0522,
+        "lon1": -118.2437,
+        "lat2": 35.6762,
+        "lon2": 139.6503,
+        "unit": "km"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_178",
+    "level": "L1",
+    "query": "What are critics saying about the film we picked for the club night?",
+    "gold_tool": "Get Movie Reviews",
+    "gold_args": {
+      "movie_id": 1375666
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Movie Reviews\", \"arguments\": {\"movie_id\": 1375666.0}}\n```",
+    "pred_parsed": {
+      "name": "Get Movie Reviews",
+      "arguments": {
+        "movie_id": 1375666.0
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_282",
+    "level": "L1",
+    "query": "Can you pull up the current status and full details for that specific MRT wagon we were tracking earlier?",
+    "gold_tool": "get_wagon_by_no_mrt_wagons__wagon_no__get",
+    "gold_args": {
+      "wagon_no": "W456"
+    },
+    "pred_raw": "```json\n{\"name\": \"get_wagon_by_no_mrt_wagons__wagon_no__get\", \"arguments\": {\"wagon_no\": \"W123\"}}\n```",
+    "pred_parsed": {
+      "name": "get_wagon_by_no_mrt_wagons__wagon_no__get",
+      "arguments": {
+        "wagon_no": "W123"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_096",
+    "level": "L2",
+    "query": "Can you whip up the usual starter scene for me with that 3D library we talked about?",
+    "gold_tool": "generateComponent",
+    "gold_args": {
+      "component_name": "HelloWorld",
+      "library": "Three.js"
+    },
+    "pred_raw": "```json\n{\"name\": \"generateComponent\", \"arguments\": {\"component_name\": \"starter scene\", \"library\": \"three\"}}\n```",
+    "pred_parsed": {
+      "name": "generateComponent",
+      "arguments": {
+        "component_name": "starter scene",
+        "library": "three"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.4
+  },
+  {
+    "qa_id": "qa_220",
+    "level": "L1",
+    "query": "Can you check where my smartphone is right now using the device layer ID I mentioned earlier?",
+    "gold_tool": "FindOneUserLocation",
+    "gold_args": {
+      "id": "xyz987"
+    },
+    "pred_raw": "```json\n{\"name\": \"FindOneUserLocation\", \"arguments\": {\"id\": \"xyz987\"}}\n```",
+    "pred_parsed": {
+      "name": "FindOneUserLocation",
+      "arguments": {
+        "id": "xyz987"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_277",
+    "level": "L2",
+    "query": "Can you pull up the latest earnings report for that company we track?",
+    "gold_tool": "Get Financial Statements",
+    "gold_args": {
+      "symbol": "AAPL",
+      "frequency": "annual",
+      "statement_type": "income",
+      "region": "US"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Financial Statements\", \"arguments\": {\"symbol\": \"AAPL\", \"frequency\": \"annual\", \"statement_type\": \"income\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Financial Statements",
+      "arguments": {
+        "symbol": "AAPL",
+        "frequency": "annual",
+        "statement_type": "income"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.8571428571428571,
+    "bleu1": 0.75
+  },
+  {
+    "qa_id": "qa_037",
+    "level": "L2",
+    "query": "Hit me with some popular quotes on the topic I was asking about earlier.",
+    "gold_tool": "Suggest",
+    "gold_args": {
+      "keyword": "technology"
+    },
+    "pred_raw": "{\"name\": \"Suggest\", \"arguments\": {\"keyword\": \"cryptocurrency exchanges\"}}",
+    "pred_parsed": {
+      "name": "Suggest",
+      "arguments": {
+        "keyword": "cryptocurrency exchanges"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_232",
+    "level": "L1",
+    "query": "Show me more clips like the one I just shared with you.",
+    "gold_tool": "Get Related Videos",
+    "gold_args": {
+      "id": "1234567890ABCDEF"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Related Videos\", \"arguments\": {\"id\": \"dQw4w9WgXcQ\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Related Videos",
+      "arguments": {
+        "id": "dQw4w9WgXcQ"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_103",
+    "level": "L4",
+    "query": "Give me a fresh dose of inspiration to keep me going with that craft I’m trying to level up, the one we keep talking about sharpening.",
+    "gold_tool": "Get Random Quote by Tag",
+    "gold_args": {
+      "tag": "writing"
+    },
+    "pred_raw": "{\"name\": \"Get Random Quote by Tag\", \"arguments\": {\"tag\": \"Relaxation\"}}",
+    "pred_parsed": {
+      "name": "Get Random Quote by Tag",
+      "arguments": {
+        "tag": "Relaxation"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_174",
+    "level": "L1",
+    "query": "Can you pull up the showtimes for that comedy we picked earlier?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Dumb and Dumber",
+      "analyzed": false,
+      "morph": false,
+      "page": 1,
+      "source": "global"
+    },
+    "pred_raw": "```json\n{\"name\": \"Media_3_GetStreamingInfo\", \"arguments\": {\"title\": \"Dumb and Dumber\"}}\n```",
+    "pred_parsed": {
+      "name": "Media_3_GetStreamingInfo",
+      "arguments": {
+        "title": "Dumb and Dumber"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.25
+  },
+  {
+    "qa_id": "qa_029",
+    "level": "L4",
+    "query": "What should I be eating more of these days to get my defenses back up?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "language": "en",
+      "number": 0,
+      "offset": 0,
+      "q": "foods to boost immune system healthy diet"
+    },
+    "pred_raw": "{\"name\": \"Search\", \"arguments\": {\"q\": \"What should I be eating more of these days to get my defenses back up?\"}}",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "q": "What should I be eating more of these days to get my defenses back up?"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.125
+  },
+  {
+    "qa_id": "qa_159",
+    "level": "L1",
+    "query": "Can you show me some good places to eat there with the cuisine and budget we talked about?",
+    "gold_tool": "find_local_restaurants",
+    "gold_args": {
+      "cuisine_type": "Spanish",
+      "location": "Barcelona",
+      "price_range": "moderate"
+    },
+    "pred_raw": "```json\n{\"name\": \"find_local_restaurants\", \"arguments\": {\"cuisine_type\": \"Spanish\", \"location\": \"Barcelona\", \"price_range\": \"moderate\"}}\n```",
+    "pred_parsed": {
+      "name": "find_local_restaurants",
+      "arguments": {
+        "cuisine_type": "Spanish",
+        "location": "Barcelona",
+        "price_range": "moderate"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_225",
+    "level": "L2",
+    "query": "Can you pull up the latest headlines on the company whose earnings drivers and risks I just asked about?",
+    "gold_tool": "Search News",
+    "gold_args": {
+      "q": "Microsoft"
+    },
+    "pred_raw": "```json\n{\"name\": \"Search News\", \"arguments\": {\"q\": \"Microsoft\", \"sortBy\": \"relevance\"}}\n```",
+    "pred_parsed": {
+      "name": "Search News",
+      "arguments": {
+        "q": "Microsoft",
+        "sortBy": "relevance"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_356",
+    "level": "L1",
+    "query": "Can you pull up the full details for that product I was looking at on the English site?",
+    "gold_tool": "Get Product",
+    "gold_args": {
+      "id": "P123"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Product\", \"arguments\": {}}\n```",
+    "pred_parsed": {
+      "name": "Get Product",
+      "arguments": {}
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.0
+  },
+  {
+    "qa_id": "qa_350",
+    "level": "L2",
+    "query": "Could you set up the project we talked about for handling the culinary planning side of things, including all the cost and prep details?",
+    "gold_tool": "CreateOrUpstringBusinessEntity",
+    "gold_args": {
+      "id": "oss_6260",
+      "name": "Restaurant Menu Creation",
+      "description": "Help me create a menu for a restaurant, taking into account costs, ingredients and preparations"
+    },
+    "pred_raw": "```json\n{\"name\": \"CreateOrUpstringBusinessEntity\", \"arguments\": {\"id\": \"7894\", \"name\": \"culinary planning\", \"description\": \"handling the culinary planning side of things, including all the cost and prep details\"}}\n```",
+    "pred_parsed": {
+      "name": "CreateOrUpstringBusinessEntity",
+      "arguments": {
+        "id": "7894",
+        "name": "culinary planning",
+        "description": "handling the culinary planning side of things, including all the cost and prep details"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.18181818181818182
+  },
+  {
+    "qa_id": "qa_061",
+    "level": "L2",
+    "query": "What's the going rate for network fees right now?",
+    "gold_tool": "Get ETH Gas Price",
+    "gold_args": {
+      "network": "mainnet"
+    },
+    "pred_raw": "{\"name\": \"Get ETH Gas Price\", \"arguments\": {\"network\": \"mainnet\"}}",
+    "pred_parsed": {
+      "name": "Get ETH Gas Price",
+      "arguments": {
+        "network": "mainnet"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_218",
+    "level": "L4",
+    "query": "What’s the 5-day outlook for the crypto we talked about, priced in the usual currency?",
+    "gold_tool": "Get Exchange Rates Forecast",
+    "gold_args": {
+      "country_code": "US",
+      "currency": "BTC",
+      "cross_currency": "USD",
+      "predict_days": 5
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Exchange Rates Forecast\", \"arguments\": {\"currency\": \"BTC\", \"cross_currency\": \"USD\", \"predict_days\": 5}}\n```",
+    "pred_parsed": {
+      "name": "Get Exchange Rates Forecast",
+      "arguments": {
+        "currency": "BTC",
+        "cross_currency": "USD",
+        "predict_days": 5
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.8571428571428571,
+    "bleu1": 0.75
+  },
+  {
+    "qa_id": "qa_211",
+    "level": "L2",
+    "query": "Can you pull up my latest contributions for that tech magazine we talked about?",
+    "gold_tool": "Get User Contributions (Articles)",
+    "gold_args": {
+      "id": "toolace_703"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get User Contributions (Articles)\", \"arguments\": {\"id\": \"Future Tech Innovations\", \"next_cursor\": null, \"per_page\": 20.0, \"sort\": \"chronologically\", \"text_format\": null}}\n```",
+    "pred_parsed": {
+      "name": "Get User Contributions (Articles)",
+      "arguments": {
+        "id": "Future Tech Innovations",
+        "next_cursor": null,
+        "per_page": 20.0,
+        "sort": "chronologically",
+        "text_format": null
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.08333333333333333
+  },
+  {
+    "qa_id": "qa_062",
+    "level": "L1",
+    "query": "Hey, can you pull up some fun trivia for that superhero flick I mentioned the ID for earlier?",
+    "gold_tool": "Get Movie Trivia",
+    "gold_args": {
+      "tconst": "tt0468569"
+    },
+    "pred_raw": "{\"name\": \"Get Movie Trivia\", \"arguments\": {\"tconst\": \"tt1375666\"}}",
+    "pred_parsed": {
+      "name": "Get Movie Trivia",
+      "arguments": {
+        "tconst": "tt1375666"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_266",
+    "level": "L1",
+    "query": "Can you pull up some tailored advice for my upcoming interview, the one we talked about?",
+    "gold_tool": "interview.get_tips",
+    "gold_args": {
+      "interview_type": "video",
+      "job_role": "manager position"
+    },
+    "pred_raw": "```json\n{\"name\": \"interview.get_tips\", \"arguments\": {\"job_role\": \"manager\", \"interview_type\": \"video\"}}\n```",
+    "pred_parsed": {
+      "name": "interview.get_tips",
+      "arguments": {
+        "job_role": "manager",
+        "interview_type": "video"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.8
+  },
+  {
+    "qa_id": "qa_064",
+    "level": "L1",
+    "query": "What are the upcoming fixtures for the club we were just talking about transfers for?",
+    "gold_tool": "Get Team Schedules",
+    "gold_args": {
+      "teamId": "LFC456"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Team Schedules\", \"arguments\": {\"teamId\": \"Manchester United\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Team Schedules",
+      "arguments": {
+        "teamId": "Manchester United"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.3333333333333333
+  },
+  {
+    "qa_id": "qa_055",
+    "level": "L1",
+    "query": "Can you pull up the next batch of those TikTok tracks we were talking about for my gym sessions?",
+    "gold_tool": "Search Music Tracks",
+    "gold_args": {
+      "keyword": "workout energy",
+      "count": 10,
+      "offset": 10,
+      "proxy": "",
+      "search_id": ""
+    },
+    "pred_raw": "{\"name\": \"Search Music Tracks\", \"arguments\": {\"keyword\": \"workout energy\", \"count\": 10, \"offset\": 10}}",
+    "pred_parsed": {
+      "name": "Search Music Tracks",
+      "arguments": {
+        "keyword": "workout energy",
+        "count": 10,
+        "offset": 10
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.7499999999999999,
+    "bleu1": 0.7777777777777778
+  },
+  {
+    "qa_id": "qa_003",
+    "level": "L1",
+    "query": "Hey, can you pull the latest stats for that hashtag the influencer is pushing on TikTok?",
+    "gold_tool": "Real-time Hashtag Search",
+    "gold_args": {
+      "keyword": "trendsetter"
+    },
+    "pred_raw": "```json\n{\"name\": \"Real-time Hashtag Search\", \"arguments\": {\"keyword\": \"trendsetter\", \"fresh\": 1.0}}\n```",
+    "pred_parsed": {
+      "name": "Real-time Hashtag Search",
+      "arguments": {
+        "keyword": "trendsetter",
+        "fresh": 1.0
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_210",
+    "level": "L1",
+    "query": "Hey, could you double-check that my email address is still valid? You know, the one I always use for everything.",
+    "gold_tool": "Email Validator",
+    "gold_args": {
+      "email": "jordan.lee@email.com"
+    },
+    "pred_raw": "```json\n{\"name\": \"Email Validator\", \"arguments\": {\"email\": \"jordan.lee@email.com\"}}\n```",
+    "pred_parsed": {
+      "name": "Email Validator",
+      "arguments": {
+        "email": "jordan.lee@email.com"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_188",
+    "level": "L2",
+    "query": "Can you pull up my profile details like you always do before we start?",
+    "gold_tool": "Get User Details",
+    "gold_args": {
+      "user_id": null
+    },
+    "pred_raw": "{\"name\": \"Get User Details\", \"arguments\": {\"user_id\": 12345.0, \"with_recently_downloaded\": false}}",
+    "pred_parsed": {
+      "name": "Get User Details",
+      "arguments": {
+        "user_id": 12345.0,
+        "with_recently_downloaded": false
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.25
+  },
+  {
+    "qa_id": "qa_139",
+    "level": "L2",
+    "query": "Can you pull up the latest articles covering that observability platform we talked about and give me the key takeaways?",
+    "gold_tool": "Get Articles",
+    "gold_args": {
+      "language": "EN",
+      "q": "LangFuse",
+      "limit": 10,
+      "required_props": "title,summary"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Articles\", \"arguments\": {\"q\": \"LangFuse\", \"language\": \"EN\", \"limit\": 100, \"sort\": \"_score:desc\", \"from\": \"2024-01-01T00:00:00\", \"to\": \"2024-03-15T16:23:22\", \"required_props\": \"title,image\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Articles",
+      "arguments": {
+        "q": "LangFuse",
+        "language": "EN",
+        "limit": 100,
+        "sort": "_score:desc",
+        "from": "2024-01-01T00:00:00",
+        "to": "2024-03-15T16:23:22",
+        "required_props": "title,image"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.36363636363636365,
+    "bleu1": 0.42857142857142855
+  },
+  {
+    "qa_id": "qa_044",
+    "level": "L1",
+    "query": "Can you pull up the 10-day outlook for those coordinates we always use?",
+    "gold_tool": "Daily Forecast (10 days)",
+    "gold_args": {
+      "latitude": "40.7128",
+      "longitude": "-74.0060"
+    },
+    "pred_raw": "```json\n{\"name\": \"Daily Forecast (10 days)\", \"arguments\": {\"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"}}\n```",
+    "pred_parsed": {
+      "name": "Daily Forecast (10 days)",
+      "arguments": {
+        "latitude": "40.7128",
+        "longitude": "-74.0060"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_357",
+    "level": "L1",
+    "query": "Can you pull up the latest overview for the place we were talking about earlier—its economy, population, and current events?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Nigeria"
+    },
+    "pred_raw": "{\"name\": \"Search\", \"arguments\": {\"text\": \"nigeria\"}}",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "text": "nigeria"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_251",
+    "level": "L1",
+    "query": "What are the newest videos in my favorite playlist these days?",
+    "gold_tool": "Playlist Videos",
+    "gold_args": {
+      "id": "PLFgquLnL59akA2PflFpeQG9L01VFg90wS"
+    },
+    "pred_raw": "```json\n{\"name\": \"YouTube Playlist Data API\", \"arguments\": {\"list\": \"PLFgquLnL59akA2PflFpeQG9L01VFg90wS\"}}\n```",
+    "pred_parsed": {
+      "name": "YouTube Playlist Data API",
+      "arguments": {
+        "list": "PLFgquLnL59akA2PflFpeQG9L01VFg90wS"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_114",
+    "level": "L2",
+    "query": "Give me a random quote to inspire me with that skill I’m working on, like you did last time.",
+    "gold_tool": "Get Random Quote by Tag",
+    "gold_args": {
+      "tag": "drawing"
+    },
+    "pred_raw": "{\"name\": \"Get Random Quote by Tag\", \"arguments\": {\"tag\": \"drawing\"}}",
+    "pred_parsed": {
+      "name": "Get Random Quote by Tag",
+      "arguments": {
+        "tag": "drawing"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_059",
+    "level": "L4",
+    "query": "Can you pull up the current buzz for those equities we were tracking stateside?",
+    "gold_tool": "Markets Equities Groups API",
+    "gold_args": {
+      "category": "countries-equity"
+    },
+    "pred_raw": "```json\n{\"name\": \"Markets Equities Groups API\", \"arguments\": {\"category\": \"countries-equity\"}}\n```",
+    "pred_parsed": {
+      "name": "Markets Equities Groups API",
+      "arguments": {
+        "category": "countries-equity"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_089",
+    "level": "L1",
+    "query": "Can you pull up the latest docs on that caching system we talked about earlier?",
+    "gold_tool": "Search",
+    "gold_args": {
+      "text": "Redis"
+    },
+    "pred_raw": "{\"name\": \"Search\", \"arguments\": {\"text\": \"redis\"}}",
+    "pred_parsed": {
+      "name": "Search",
+      "arguments": {
+        "text": "redis"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_101",
+    "level": "L2",
+    "query": "Can you pull up the latest stuff from his account, like I asked before?",
+    "gold_tool": "Get User Tweets and Replies by REST ID",
+    "gold_args": {
+      "cursor": "",
+      "limit": "40",
+      "user_id": "44196397"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get User Tweets and Replies by REST ID\", \"arguments\": {\"user_id\": \"67890\"}}\n```",
+    "pred_parsed": {
+      "name": "Get User Tweets and Replies by REST ID",
+      "arguments": {
+        "user_id": "67890"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.2
+  },
+  {
+    "qa_id": "qa_376",
+    "level": "L1",
+    "query": "Could you read out the key line from my speech about teamwork, like you did last time?",
+    "gold_tool": "Text to Speech",
+    "gold_args": {
+      "lang": "en-us",
+      "text": "Collaboration is the key...success."
+    },
+    "pred_raw": "{\"name\": \"Text to Speech\", \"arguments\": {\"text\": \"Collaboration is the key...success.\"}}",
+    "pred_parsed": {
+      "name": "Text to Speech",
+      "arguments": {
+        "text": "Collaboration is the key...success."
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.7142857142857143
+  },
+  {
+    "qa_id": "qa_252",
+    "level": "L2",
+    "query": "Where can I juice up nearby?",
+    "gold_tool": "Nearest Alternative Fuel Stations",
+    "gold_args": {
+      "format": "json",
+      "fuel_type": "ELEC"
+    },
+    "pred_raw": "{\"name\": \"Nearest Alternative Fuel Stations\", \"arguments\": {\"format\": \"json\"}}",
+    "pred_parsed": {
+      "name": "Nearest Alternative Fuel Stations",
+      "arguments": {
+        "format": "json"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.6666666666666666,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_365",
+    "level": "L3",
+    "query": "Could you pull up the next ten days of weather for where I’m sitting right now, like you did last time?",
+    "gold_tool": "Daily Forecast (10 days)",
+    "gold_args": {
+      "latitude": "34.0522",
+      "longitude": "-118.2437"
+    },
+    "pred_raw": "```json\n{\"name\": \"Daily Forecast (10 days)\", \"arguments\": {\"latitude\": \"34.0522\", \"longitude\": \"118.2437\"}}\n```",
+    "pred_parsed": {
+      "name": "Daily Forecast (10 days)",
+      "arguments": {
+        "latitude": "34.0522",
+        "longitude": "118.2437"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.75
+  },
+  {
+    "qa_id": "qa_057",
+    "level": "L2",
+    "query": "Can you pull up the latest quarterly balance sheet for the company we were just talking about?",
+    "gold_tool": "Balance Sheet",
+    "gold_args": {
+      "ticker": "msft",
+      "formtype": "10-q",
+      "filingorder": 0
+    },
+    "pred_raw": "```json\n{\"name\": \"Balance Sheet\", \"arguments\": {\"ticker\": \"msft\", \"formtype\": \"10-q\"}}\n```",
+    "pred_parsed": {
+      "name": "Balance Sheet",
+      "arguments": {
+        "ticker": "msft",
+        "formtype": "10-q"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.8,
+    "bleu1": 0.6666666666666666
+  },
+  {
+    "qa_id": "qa_160",
+    "level": "L2",
+    "query": "Before I lock in the booking, can you pull up what people are saying about the place I shortlisted for my stay?",
+    "gold_tool": "checkReviews",
+    "gold_args": {
+      "hotel_id": "MISSING"
+    },
+    "pred_raw": "{\"name\": \"checkReviews\", \"arguments\": {\"hotel_id\": \"12345\"}}",
+    "pred_parsed": {
+      "name": "checkReviews",
+      "arguments": {
+        "hotel_id": "12345"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_362",
+    "level": "L1",
+    "query": "Hey, can you whip up that meme we talked about with the usual bottom text?",
+    "gold_tool": "Meme Generation API",
+    "gold_args": {
+      "text": "Join us now!"
+    },
+    "pred_raw": "{\"name\": \"Meme Generation API\", \"arguments\": {\"text\": \"Watercolor painting is a calming creative activity that encourages mindfulness and artistic expression.\"}}",
+    "pred_parsed": {
+      "name": "Meme Generation API",
+      "arguments": {
+        "text": "Watercolor painting is a calming creative activity that encourages mindfulness and artistic expression."
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.07142857142857142
+  },
+  {
+    "qa_id": "qa_253",
+    "level": "L1",
+    "query": "Hey, can you tell me how many people are currently on that CS:GO server we set up?",
+    "gold_tool": "Get Player Count",
+    "gold_args": {
+      "IP": "203.0.113.0",
+      "Port": "27015"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get Player Count\", \"arguments\": {\"IP\": \"203.0.113.0\", \"Port\": \"203.0.113.0\"}}\n```",
+    "pred_parsed": {
+      "name": "Get Player Count",
+      "arguments": {
+        "IP": "203.0.113.0",
+        "Port": "203.0.113.0"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.5,
+    "bleu1": 0.75
+  },
+  {
+    "qa_id": "qa_144",
+    "level": "L1",
+    "query": "Can you pull up the profile details for that user we were discussing earlier?",
+    "gold_tool": "Get User Metadata",
+    "gold_args": {
+      "user_id": "John456"
+    },
+    "pred_raw": "```json\n{\"name\": \"Get User Metadata\", \"arguments\": {\"user_id\": \"Lucy123\"}}\n```",
+    "pred_parsed": {
+      "name": "Get User Metadata",
+      "arguments": {
+        "user_id": "Lucy123"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  },
+  {
+    "qa_id": "qa_377",
+    "level": "L1",
+    "query": "How’s my exoskeleton doing right now?",
+    "gold_tool": "getExoskeletonStatus",
+    "gold_args": {
+      "robot_id": "EXO12345"
+    },
+    "pred_raw": "{\"name\": \"getExoskeletonStatus\", \"arguments\": {\"robot_id\": \"EXO12345\"}}",
+    "pred_parsed": {
+      "name": "getExoskeletonStatus",
+      "arguments": {
+        "robot_id": "EXO12345"
+      }
+    },
+    "tool_accuracy": 1.0,
+    "f1": 1.0,
+    "bleu1": 1.0
+  },
+  {
+    "qa_id": "qa_299",
+    "level": "L4",
+    "query": "Can you pull up the final championship order for that season we were tracking?",
+    "gold_tool": "Get Driver Standings",
+    "gold_args": {
+      "season_id": 2025
+    },
+    "pred_raw": "{\"name\": \"Seasonenddriverstandings\", \"arguments\": {\"year\": \"2025\"}}",
+    "pred_parsed": {
+      "name": "Seasonenddriverstandings",
+      "arguments": {
+        "year": "2025"
+      }
+    },
+    "tool_accuracy": 0.0,
+    "f1": 0.0,
+    "bleu1": 0.5
+  }
+]

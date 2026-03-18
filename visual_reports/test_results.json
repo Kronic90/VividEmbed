@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-03-18T16:56:12.510732",
+  "total_tests": 190,
+  "passed": 190,
+  "failed": 0,
+  "pass_rate": 100.0,
+  "embed_dim": 389,
+  "base_dim": 384,
+  "fine_tuned_model": "all-MiniLLM-VividTuned",
+  "features": {
+    "core": [
+      "emotion_clustering",
+      "semantic_grouping",
+      "vividness_decay",
+      "mood_congruence",
+      "importance_weighting",
+      "contradiction_detection",
+      "persistence",
+      "similarity_structure",
+      "pad_space",
+      "vector_properties",
+      "filters",
+      "index_management",
+      "batch_add",
+      "query_by_emotion",
+      "emotion_clusters_api",
+      "vividness_distribution",
+      "edge_cases"
+    ],
+    "novel_v3": [
+      "reconsolidation",
+      "emotional_transitions",
+      "pattern_separation",
+      "narrative_arcs",
+      "entity_grounding"
+    ],
+    "cortex": [
+      "core_memory",
+      "query_decomposition",
+      "conversation_processing",
+      "context_block",
+      "agentic_edit",
+      "reflection",
+      "persistence",
+      "json_parsing"
+    ]
+  }
+}
