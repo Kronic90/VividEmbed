@@ -190,6 +190,60 @@ def _emotion_to_pad(emotion: str) -> np.ndarray:
 
 
 # ──────────────────────────────────────────────────────────────────
+# Narrative Arc & Emotional Transitions
+# ──────────────────────────────────────────────────────────────────
+
+ARC_POSITIONS = ("setup", "rising", "climax", "falling", "resolution")
+
+_ARC_KEYWORDS: dict[str, list[str]] = {
+    "setup":      ["started", "began", "first time", "new to", "just moved",
+                   "recently", "signed up", "enrolled", "met someone",
+                   "beginning of", "day one", "just got"],
+    "rising":     ["getting better", "improving", "making progress", "building",
+                   "working toward", "developing", "growing", "learning to",
+                   "step by step", "each day", "little by little"],
+    "climax":     ["finally", "breakthrough", "the most", "incredible", "worst",
+                   "best", "never forget", "changed everything", "turning point",
+                   "everything changed", "can't believe", "couldn't stop"],
+    "falling":    ["after that", "since then", "coming down", "settling",
+                   "adjusting", "processing", "starting to", "still thinking",
+                   "winding down", "aftermath", "the dust settled"],
+    "resolution": ["learned", "now I know", "looking back", "in the end",
+                   "at peace", "moved on", "accepted", "grateful for",
+                   "it taught me", "chapter closed", "wouldn't change"],
+}
+
+# Moods used for [FROM:x] emotional-transition tokens
+_TRANSITION_MOODS = [
+    "happy", "sad", "angry", "anxious", "calm",
+    "excited", "lonely", "hopeful", "nostalgic", "neutral",
+]
+
+
+def _infer_arc_position(text: str, emotion: str = "neutral") -> str:
+    """Infer narrative arc position from content and emotional tone."""
+    text_lower = text.lower()
+    scores: dict[str, float] = {arc: 0.0 for arc in ARC_POSITIONS}
+    for arc, keywords in _ARC_KEYWORDS.items():
+        for kw in keywords:
+            if kw in text_lower:
+                scores[arc] += 1.0
+
+    # Use emotional arousal as a secondary signal
+    pad = _emotion_to_pad(emotion)
+    arousal = abs(float(pad[1]))
+    if arousal > 0.6:
+        scores["climax"] += 0.7
+    elif arousal > 0.3:
+        scores["rising"] += 0.4
+    else:
+        scores["resolution"] += 0.3
+
+    best = max(scores, key=scores.get)
+    return best if scores[best] > 0 else ""
+
+
+# ──────────────────────────────────────────────────────────────────
 # VividEntry  —  one indexed memory
 # ──────────────────────────────────────────────────────────────────
 @dataclass
@@ -204,6 +258,10 @@ class VividEntry:
     entity:     str            = ""
     vector:     np.ndarray     = field(default_factory=lambda: np.zeros(EMBED_DIM, dtype=np.float32))
     uid:        str            = ""         # unique id (content hash)
+    # ── Novel features (reconsolidation, transitions, narrative arcs)
+    recall_count: int          = 0          # times this memory was recalled
+    prev_emotion: str          = ""         # emotional state before this memory
+    arc_position: str          = ""         # narrative arc: setup/rising/climax/falling/resolution
 
     def __post_init__(self):
         if not self.timestamp:
@@ -243,7 +301,7 @@ class VividEntry:
 
     # ── Serialisation ────────────────────────────────────────
     def to_dict(self) -> dict:
-        return {
+        d = {
             "content":    self.content,
             "emotion":    self.emotion,
             "importance": self.importance,
@@ -253,18 +311,29 @@ class VividEntry:
             "entity":     self.entity,
             "uid":        self.uid,
         }
+        # Only include novel fields when set (backward-compat)
+        if self.recall_count:
+            d["recall_count"] = self.recall_count
+        if self.prev_emotion:
+            d["prev_emotion"] = self.prev_emotion
+        if self.arc_position:
+            d["arc_position"] = self.arc_position
+        return d
 
     @classmethod
     def from_dict(cls, d: dict, vector: np.ndarray | None = None) -> "VividEntry":
         entry = cls(
-            content    = d["content"],
-            emotion    = d.get("emotion", "neutral"),
-            importance = d.get("importance", 5),
-            stability  = d.get("stability", 3.0),
-            timestamp  = d.get("timestamp", ""),
-            source     = d.get("source", "reflection"),
-            entity     = d.get("entity", ""),
-            uid        = d.get("uid", ""),
+            content      = d["content"],
+            emotion      = d.get("emotion", "neutral"),
+            importance   = d.get("importance", 5),
+            stability    = d.get("stability", 3.0),
+            timestamp    = d.get("timestamp", ""),
+            source       = d.get("source", "reflection"),
+            entity       = d.get("entity", ""),
+            uid          = d.get("uid", ""),
+            recall_count = d.get("recall_count", 0),
+            prev_emotion = d.get("prev_emotion", ""),
+            arc_position = d.get("arc_position", ""),
         )
         if vector is not None:
             entry.vector = vector
@@ -358,11 +427,14 @@ class VividEmbed:
         text: str,
         emotion: str = "neutral",
         importance: int = 5,
+        prev_emotion: str = "",
+        arc_position: str = "",
     ) -> np.ndarray:
         """Encode a memory for storage.
 
-        VividEmbedder: prepends [EMO:x] [IMP:n] tokens, returns
-                       un-normalised 384-d (‖v‖ ∝ importance).
+        VividEmbedder: prepends [EMO:x] [IMP:n] tokens (and optionally
+                       [FROM:x] transition / [ARC:x] narrative tokens),
+                       returns un-normalised 384-d (‖v‖ ∝ importance).
         Vanilla model: returns L2-normalised 384-d base embedding.
         """
         if not hasattr(self, "_vivid_checked"):
@@ -371,7 +443,17 @@ class VividEmbed:
 
         model = _get_model()
         if self._is_vivid_model:
-            tagged = f"[EMO:{emotion}] [IMP:{importance}] {text}"
+            parts = []
+            # Emotional transition: [FROM:prev] when emotion changed
+            if prev_emotion and prev_emotion != emotion:
+                parts.append(f"[FROM:{prev_emotion}]")
+            parts.append(f"[EMO:{emotion}]")
+            parts.append(f"[IMP:{importance}]")
+            # Narrative arc position
+            if arc_position and arc_position in ARC_POSITIONS:
+                parts.append(f"[ARC:{arc_position}]")
+            parts.append(text)
+            tagged = " ".join(parts)
             return np.array(
                 model.encode(tagged, normalize_embeddings=False,
                              show_progress_bar=False),
@@ -427,21 +509,33 @@ class VividEmbed:
         source: str = "reflection",
         entity: str = "",
         timestamp: str = "",
+        prev_emotion: str = "",
+        arc_position: str = "",
     ) -> VividEntry:
         """Embed and index a new memory.
 
         Returns the created VividEntry.
         """
+        # Infer narrative arc position if not provided
+        if not arc_position:
+            arc_position = _infer_arc_position(content, emotion)
+
         entry = VividEntry(
-            content    = content,
-            emotion    = emotion,
-            importance = max(1, min(10, importance)),
-            stability  = max(0.1, stability),
-            source     = source,
-            entity     = entity,
-            timestamp  = timestamp or datetime.now().isoformat(),
+            content      = content,
+            emotion      = emotion,
+            importance   = max(1, min(10, importance)),
+            stability    = max(0.1, stability),
+            source       = source,
+            entity       = entity,
+            timestamp    = timestamp or datetime.now().isoformat(),
+            prev_emotion = prev_emotion,
+            arc_position = arc_position,
         )
         entry.vector = self._build_vector(entry)
+
+        # Hippocampal pattern separation: push apart near-duplicate vectors
+        if self._is_vivid_model:
+            self._pattern_separate(entry)
 
         if entry.uid in self._uid_set:
             # Update existing entry instead of duplicating
@@ -470,14 +564,18 @@ class VividEmbed:
         # Build entries (without vectors)
         entries: list[VividEntry] = []
         for d in items:
+            emo = d.get("emotion", "neutral")
+            arc = d.get("arc_position", "") or _infer_arc_position(d["content"], emo)
             entry = VividEntry(
-                content    = d["content"],
-                emotion    = d.get("emotion", "neutral"),
-                importance = max(1, min(10, d.get("importance", 5))),
-                stability  = max(0.1, d.get("stability", 3.0)),
-                source     = d.get("source", "reflection"),
-                entity     = d.get("entity", ""),
-                timestamp  = d.get("timestamp", "") or datetime.now().isoformat(),
+                content      = d["content"],
+                emotion      = emo,
+                importance   = max(1, min(10, d.get("importance", 5))),
+                stability    = max(0.1, d.get("stability", 3.0)),
+                source       = d.get("source", "reflection"),
+                entity       = d.get("entity", ""),
+                timestamp    = d.get("timestamp", "") or datetime.now().isoformat(),
+                prev_emotion = d.get("prev_emotion", ""),
+                arc_position = arc,
             )
             entries.append(entry)
 
@@ -493,6 +591,8 @@ class VividEmbed:
                     entry.content,
                     emotion=entry.emotion,
                     importance=entry.importance,
+                    prev_emotion=entry.prev_emotion,
+                    arc_position=entry.arc_position,
                 )
                 if entry.uid not in self._uid_set:
                     self._entries.append(entry)
@@ -527,6 +627,7 @@ class VividEmbed:
         source_filter: str | None = None,
         min_importance: int = 0,
         include_vector: bool = False,
+        reconsolidate: bool = True,
     ) -> list[dict]:
         """Retrieve the most relevant memories for a query.
 
@@ -598,6 +699,11 @@ class VividEmbed:
 
         # Sort descending
         scored.sort(key=lambda x: x[0], reverse=True)
+
+        # Memory reconsolidation: recalled memories drift toward query context
+        if reconsolidate and self._is_vivid_model:
+            for _, entry in scored[:top_k]:
+                self._reconsolidate(entry, q_vec)
 
         # Build results
         results: list[dict] = []
@@ -748,6 +854,7 @@ class VividEmbed:
         """Simulate a spaced-repetition touch on a memory."""
         for entry in self._entries:
             if entry.uid == uid:
+                entry.recall_count += 1
                 # Only boost stability if enough time has passed
                 if entry.age_days >= min_spacing_days:
                     effective = 1.0 + (spacing_bonus - 1.0) * (
@@ -958,6 +1065,8 @@ class VividEmbed:
                 entry.content,
                 emotion=entry.emotion,
                 importance=entry.importance,
+                prev_emotion=entry.prev_emotion,
+                arc_position=entry.arc_position,
             )
         base = _get_model().encode(entry.content, normalize_embeddings=True,
                                     show_progress_bar=False)
@@ -1067,6 +1176,95 @@ class VividEmbed:
           + self._w_rec  * recency
         )
         return score
+
+    # ──────────────────────────────────────────────────────────
+    # Internal — Memory Reconsolidation
+    # ──────────────────────────────────────────────────────────
+
+    def _reconsolidate(
+        self,
+        entry: VividEntry,
+        query_vec: np.ndarray,
+        base_alpha: float = 0.98,
+        sim_threshold: float = 0.5,
+    ):
+        """Slightly blend memory vector toward query context.
+
+        Models memory reconsolidation (Nader et al., 2000): each time
+        a memory is recalled, it is briefly destabilised and re-stored
+        with subtle influence from the retrieval context.
+
+            v' = α·v + (1−α)·q,  then rescaled to preserve ‖v‖
+
+        α starts at *base_alpha* and increases toward 0.995 as
+        recall_count grows — early memories are more plastic, later
+        recalls cause less drift (consolidation over time).
+        """
+        entry.recall_count += 1
+
+        # Only reconsolidate if genuinely relevant to this query
+        q_norm = np.linalg.norm(query_vec)
+        m_norm = np.linalg.norm(entry.vector)
+        if q_norm == 0 or m_norm == 0:
+            return
+        cos_sim = float(np.dot(query_vec, entry.vector) / (q_norm * m_norm))
+        if cos_sim < sim_threshold:
+            return
+
+        # Adaptive alpha: more consolidated memories resist drift
+        alpha = min(0.995, base_alpha + (1.0 - base_alpha) * (
+            1.0 - 0.9 ** entry.recall_count
+        ))
+
+        blended = alpha * entry.vector + (1.0 - alpha) * query_vec
+        new_norm = np.linalg.norm(blended)
+        if new_norm > 0:
+            # Preserve original magnitude (importance encoding)
+            entry.vector = blended * (m_norm / new_norm)
+
+    # ──────────────────────────────────────────────────────────
+    # Internal — Hippocampal Pattern Separation
+    # ──────────────────────────────────────────────────────────
+
+    def _pattern_separate(
+        self,
+        new_entry: VividEntry,
+        threshold: float = 0.92,
+        epsilon: float = 0.015,
+    ):
+        """Push apart near-duplicate vectors (pattern separation).
+
+        The hippocampus actively decorrelates similar inputs to reduce
+        interference.  When a new memory is very close to an existing
+        one (cos_sim > threshold) but has different content, we apply
+        a micro-repulsion nudge of magnitude *epsilon* to the existing
+        vector, preserving its norm (importance encoding).
+        """
+        new_vec = new_entry.vector
+        new_norm = np.linalg.norm(new_vec)
+        if new_norm == 0 or len(self._entries) == 0:
+            return
+
+        for existing in self._entries:
+            e_norm = np.linalg.norm(existing.vector)
+            if e_norm == 0:
+                continue
+            cos_sim = float(np.dot(new_vec, existing.vector)
+                            / (new_norm * e_norm))
+
+            if cos_sim > threshold:
+                # Skip if content is actually identical
+                if (new_entry.content.strip().lower()
+                        == existing.content.strip().lower()):
+                    continue
+                # Micro-repulsion: push existing slightly away from new
+                diff = existing.vector - new_vec
+                diff_norm = np.linalg.norm(diff)
+                if diff_norm > 0:
+                    nudge = epsilon * (diff / diff_norm)
+                    existing.vector = existing.vector + nudge
+                    # Preserve original magnitude
+                    existing.vector *= (e_norm / np.linalg.norm(existing.vector))
 
     # ──────────────────────────────────────────────────────────
     # repr
